@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Calculadora</title>
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #8b0000, #ff0000);
+    font-family: Arial, sans-serif;
+  }
+
+  .calculadora {
+    background: rgba(0,0,0,0.9);
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 0 25px rgba(0,0,0,0.6);
+    width: 260px;
+  }
+
+  #resultado {
+    width: 100%;
+    height: 50px;
+    background: #fff;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    text-align: right;
+    padding: 10px;
+    font-size: 22px;
+    overflow: hidden;
+  }
+
+  .botoes {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+
+  button {
+    min-height: 50px; /* permite crescer */
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    cursor: pointer;
+  }
+
+  .numero {
+    background: #222;
+    color: white;
+  }
+
+  .operador {
+    background: #ff3b3b;
+    color: white;
+  }
+
+  .igual {
+    background: #ff3b3b; /* mesma cor */
+    color: white;
+    grid-row: span 2; /* ocupa 2 linhas */
+    height: 100%;
+    font-size: 22px;
+  }
+
+  .zero {
+    grid-column: span 2; /* ocupa 2 colunas */
+  }
+
+</style>
+</head>
+
+<body>
+
+<div class="calculadora">
+
+  <div id="resultado"></div>
+
+  <div class="botoes">
+    <button onclick="clean()" class="operador">C</button>
+    <button onclick="back()" class="operador">←</button>
+    <button onclick="insert('/')" class="operador">/</button>
+    <button onclick="insert('*')" class="operador">*</button>
+
+    <button onclick="insert('7')" class="numero">7</button>
+    <button onclick="insert('8')" class="numero">8</button>
+    <button onclick="insert('9')" class="numero">9</button>
+    <button onclick="insert('-')" class="operador">-</button>
+
+    <button onclick="insert('4')" class="numero">4</button>
+    <button onclick="insert('5')" class="numero">5</button>
+    <button onclick="insert('6')" class="numero">6</button>
+    <button onclick="insert('+')" class="operador">+</button>
+
+    <button onclick="insert('1')" class="numero">1</button>
+    <button onclick="insert('2')" class="numero">2</button>
+    <button onclick="insert('3')" class="numero">3</button>
+    <button onclick="calcular()" class="igual">=</button>
+
+    <button onclick="insert('0')" class="numero zero">0</button>
+    <button onclick="insert('.')" class="numero">.</button>
+  </div>
+
+</div>
+
+<script>
+  function insert(valor) {
+    let tela = document.getElementById("resultado");
+    tela.innerHTML += valor;
+  }
+
+  function clean() {
+    document.getElementById("resultado").innerHTML = "";
+  }
+
+  function back() {
+    let tela = document.getElementById("resultado");
+    tela.innerHTML = tela.innerHTML.slice(0, -1);
+  }
+
+  function calcular() {
+    let tela = document.getElementById("resultado");
+
+    try {
+      let resultado = eval(tela.innerHTML);
+      tela.innerHTML = resultado;
+    } catch {
+      tela.innerHTML = "Erro";
+    }
+  }
+</script>
+
+</body>
+</html>
